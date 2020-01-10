@@ -1,26 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/** Components */
+import Form from './components/Form'
+import Note from './components/Note'
+
+class App extends React.Component {
+
+    state = {
+        titulo:'',
+        descripcion:'',
+        notes:[]
+    }
+
+    handlerTitulo = (event) => this.setState({ titulo : event.target.value })
+
+    handlerDescripcion = (event) => this.setState({ descripcion : event.target.value })
+
+    handlerSubmit = () => {
+        this.setState({
+            titulo:'',
+            descripcion:'',    
+            notes:[
+                ...this.state.notes,
+                {
+                    titulo: this.state.titulo,
+                    descripcion: this.state.descripcion
+                }]
+            })
+    }
+
+    render() {
+
+        return (
+        <div>
+            <Form 
+                titulo={this.state.titulo}
+                descripcion={this.state.descripcion}
+                handlerTitulo={this.handlerTitulo}
+                handlerDescripcion={this.handlerDescripcion}
+                handlerSubmit={this.handlerSubmit}
+            />
+            <hr/>
+            <div>
+                <h1>Notas</h1>
+                {
+                    this.state.notes.map( ({titulo, descripcion},key) => {
+                        return <Note
+                            key={ key }
+                            titulo = { titulo }
+                            descripcion = { descripcion }
+                        />
+                    } )
+                }
+            </div>
+        </div>
+        )
+    }
 }
 
-export default App;
+export default App
