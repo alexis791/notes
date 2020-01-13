@@ -4,6 +4,9 @@ import React from 'react'
 import Form from './components/Form'
 import Note from './components/Note'
 
+/** Redux */
+import { connect } from 'react-redux'
+
 class App extends React.Component {
 
     state = {
@@ -30,7 +33,7 @@ class App extends React.Component {
     }
 
     render() {
-
+        console.log(this.props)
         return (
         <div>
             <Form 
@@ -58,4 +61,7 @@ class App extends React.Component {
     }
 }
 
-export default App
+const mapStateToProps = ({ notes }) => notes
+
+
+export default connect(mapStateToProps)(App)
