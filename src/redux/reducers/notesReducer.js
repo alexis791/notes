@@ -7,7 +7,14 @@ const initialState = {
 }
 
 const notesReducer = ( state = initialState, action ) => {
-    return state
+    switch (action.type) {
+        case 'CREATE_NOTE':
+            console.log('Note is create ', action.note)
+            return state   
+    
+        default:
+            return state
+    }
 }
 
 export default notesReducer

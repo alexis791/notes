@@ -6,36 +6,27 @@ import Note from './components/Note'
 
 /** Redux */
 import { connect } from 'react-redux'
+import { createNote } from './redux/actions/noteActions'
 
 class App extends React.Component {
 
     state = {
         titulo:'',
-        descripcion:'',
-        notes:[]
+        descripcion:''
     }
 
+    
 
     handlerTitulo = (event) => this.setState({ titulo : event.target.value })
 
     handlerDescripcion = (event) => this.setState({ descripcion : event.target.value })
 
     handlerSubmit = () => {
-        this.setState({
-            titulo:'',
-            descripcion:'',    
-            notes:[
-                ...this.state.notes,
-                {
-                    titulo: this.state.titulo,
-                    descripcion: this.state.descripcion
-                }]
-            })
+       this.props.createNote(this.state)
     }
 
     render() {
         const { notes } = this.props
-        console.log(notes)
         return (
         <div>
             <Form 
@@ -61,5 +52,9 @@ class App extends React.Component {
 
 const mapStateToProps = ({ notes }) => notes
 
+const dispatchStateToProps = {
+    createNote
+}
 
-export default connect(mapStateToProps)(App)
+
+export default connect(mapStateToProps, dispatchStateToProps)(App)
