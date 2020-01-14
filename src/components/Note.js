@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Note = ({ titulo, descripcion }) => (
+const Note = ({note}) => (
     <div>
-        <h4>{ titulo }</h4>
-        <p>{ descripcion }</p>
+        <h4>{ note.titulo }</h4>
+        <p>{ note.descripcion }</p>
     </div>
 )
 

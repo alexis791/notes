@@ -15,6 +15,7 @@ class App extends React.Component {
         notes:[]
     }
 
+
     handlerTitulo = (event) => this.setState({ titulo : event.target.value })
 
     handlerDescripcion = (event) => this.setState({ descripcion : event.target.value })
@@ -33,7 +34,8 @@ class App extends React.Component {
     }
 
     render() {
-        console.log(this.props)
+        const { notes } = this.props
+        console.log(notes)
         return (
         <div>
             <Form 
@@ -47,12 +49,8 @@ class App extends React.Component {
             <div>
                 <h1>Notas</h1>
                 {
-                    this.state.notes.map( ({titulo, descripcion},key) => {
-                        return <Note
-                            key={ key }
-                            titulo = { titulo }
-                            descripcion = { descripcion }
-                        />
+                    notes.map( (note, key) => {
+                        return <Note note={ note } key={ key } />
                     } )
                 }
             </div>
